@@ -1,0 +1,18 @@
+{
+  "name": "azureadapp2",
+  "version": "1.0.0",
+  "description": "AzurePortal",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "express": "^4.16.2",
+    "hbs": "^4.0.1",
+    "passport": "^0.4.0",
+    "passport-azure-ad": "^3.0.9"
+  }
+}
