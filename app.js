@@ -5,8 +5,9 @@ const authRoutes = require('./routes/auth-routes');
 var bunyan = require('bunyan');
 var log = bunyan.createLogger({ name: "app.js" });
 const passportSetup=require('./config/passport-setup');
-
-
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser'); 
+app.use(bodyParser.urlencoded({ extended: true }));
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 //app.set('views', __dirname + '/views');
@@ -14,6 +15,7 @@ app.set('view engine', 'hbs');
 log.info('Starting app')
 //setup routes
 
+app.use(cookieParser());
 app.use('/auth', authRoutes);
 hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear()

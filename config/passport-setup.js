@@ -33,9 +33,10 @@ passport.use(new AzureOIDCStrategy({
       useCookieInsteadOfSession: true,
       issuer: null,
       isB2C: false
-}, () => {
+}, (req, iss, sub, profile, access_token, refresh_token, done) => {
     //passport callback function
-    console.log('passport call back fun fired');
-   
+    log.info('passport call back function fired');
+
+   console.log('access token is ++++'+access_token)
 })
 )
