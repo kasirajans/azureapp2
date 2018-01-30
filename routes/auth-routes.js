@@ -21,10 +21,21 @@ var log = bunyan.createLogger({ name: "auth-routes.js" });
 
 //     });
 
-router.get('/login', passport.authenticate('azuread-openidconnect',
-   
-)
+router.get('/login', passport.authenticate('azuread-openidconnect')
 );
+
+
+//Get the Authcode and  resend the authcode to get access token
+router.post('/openid/return', passport.authenticate('azuread-openidconnect'), (req, res) => {
+    log.info('Got proifle info');
+    res.send('got call back' +req.user);
+});
+
+  
+router.get('/openid/return',  (req, res) => {
+    log.info('Returned AuthCode response');
+    res.send('got call back');
+});
 
 //logout
 router.get('/logout', (req, res) => {
@@ -33,18 +44,6 @@ router.get('/logout', (req, res) => {
         pageTitle: 'Logout'
 
     });
-});
-
-//Get the Authcode and  resend the authcode to get access token
-router.post('/openid/return', passport.authenticate('azuread-openidconnect'), (req, res) => {
-    log.info('Got proifle info');
-    res.send('got call back');
-});
-
-  
-router.get('/openid/return',  (req, res) => {
-    log.info('Returned AuthCode response');
-    res.send('got call back');
 });
 
 module.exports = router;
