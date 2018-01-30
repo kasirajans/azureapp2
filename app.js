@@ -19,6 +19,15 @@ app.set('view engine', 'hbs');
 
 log.info('Starting app')
 
+// For the routes you want to check if user is already logged in, use 
+// `ensureAuthenticated`. It checks if there is an user stored in session, if not
+// it will call `passport.authenticate` to ask for user to log in.
+//-----------------------------------------------------------------------------
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/auth/login');
+};
+
 
 //Connect DB or express session 
 if(keys.mongodb.dbEnabled){
@@ -56,10 +65,13 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/profile', (req, res) => {
+// check user logged in 
+
+app.get('/profile',ensureAuthenticated, (req, res) => {
     log.info('Profile page')
+    console.log("accesstoke is "+req.access_token)
     res.render('profile.hbs', {
-        pageTitle: 'Profile'
+        user:req.user
     });
 });
 

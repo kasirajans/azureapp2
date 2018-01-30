@@ -14,18 +14,20 @@ log.info('Setting up passport.js');
 // the user by ID when deserializing.
 //-----------------------------------------------------------------------------
 passport.serializeUser(function(user, done) {
+  log.info('serializeUser: '+user.upn);
     done(null, user.oid);
   });
   
   passport.deserializeUser(function(oid, done) {
     findByOid(oid, function (err, user) {
+      //console.log("USer in serial" +req.user.given_name);
       done(err, user);
     });
   });
   
 // array to hold logged in users
 var users = [];
-var access_Token;
+var accessToken;
 var findByOid = function(oid, fn) {
   for (var i = 0, len = users.length; i < len; i++) {
     var user = users[i];
@@ -89,6 +91,7 @@ if (!profile.oid) {
       if (!user) {
         // "Auto-registration"
         users.push(profile);
+        accessToken=access_token;
 
         log.info('usera Profile is not exists: '+user);
 //console.log("access token is "+accessToken);

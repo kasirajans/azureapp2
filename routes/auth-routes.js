@@ -27,14 +27,16 @@ router.get('/login', passport.authenticate('azuread-openidconnect')
 
 //Get the Authcode and  resend the authcode to get access token
 router.post('/openid/return', passport.authenticate('azuread-openidconnect'), (req, res) => {
-    log.info('Got proifle info');
-    res.send('got call back' +req.user);
+    log.info('Redirecting to  profile page');
+  
+  
+    res.redirect('/profile');
 });
 
   
 router.get('/openid/return',  (req, res) => {
     log.info('Returned AuthCode response');
-    res.send('got call back');
+    res.send('got call back' +req.user);
 });
 
 //logout
