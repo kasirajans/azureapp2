@@ -33,7 +33,7 @@ function ensureAuthenticated(req, res, next) {
 
 
 //Connect DB or express session 
-if(keys.mongodb.dbEnabled){
+if(false){
 mongoose.connect(keys.mongodb.dbURI,()=>{
 
     log.info('Connected to mongo DB');
@@ -69,7 +69,8 @@ hbs.registerHelper('getCurrentYear', () => {
 app.get('/', (req, res) => {
     log.info('Home page')
     res.render('home.hbs', {
-        pageTitle: 'Home'
+        pageTitle: 'Home',
+        user:req.user
 
     });
 });
@@ -77,9 +78,9 @@ app.get('/', (req, res) => {
 
 // check user logged in 
 
-app.get('/profile',ensureAuthenticated, (req, res) => {
+app.get('/profile', (req, res) => {
     log.info('Profile page')
-    console.log("accesstoke is "+req.access_token)
+    console.log("accesstoke is "+req.user.access_token)
     res.render('profile.hbs', {
         user:req.user
     });
@@ -87,4 +88,7 @@ app.get('/profile',ensureAuthenticated, (req, res) => {
 
 app.listen(port, () => console.log('Azure AD portal app listerning in '+port));
 //module.export=hbs;
+
+
+
 

@@ -1,21 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
+<style>
+div.container {
+    width: 100%;
+    border: 1px solid gray;
+}
+
 header {
-    color: rgb(255, 255, 255);
+    
+    padding: 1em;
+    color: white;
+    background-color: rgba(231, 118, 26, 0.568);
+    clear: left;
+    text-align: center;
+}
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    color: white;
+    background-color: rgba(231, 118, 26, 0.301);
+    clear: left;
+    text-align: center;
+}
+nav {
+    padding: 1em;
+    color: white;   
+    background-color: rgba(231, 118, 26, 0.301);
+    clear: left;
     text-align: center;
 }
 
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+   
+nav ul a {
+    text-decoration: none;
+}
 
-    </style>
-<title>Page Title</title>
+article {
+    
+    text-align: center;
+    padding: 1em;
+    overflow: hidden;
+}
+</style>
 </head>
 <body>
-{{> header}}
-<p>Home page</p>
 
+<div class="container">
+
+
+{{#if user}}
+<nav>
+{{> header}}
+</nav>
+{{else}}
+<nav>
+    <header>
+        <h1>IDAM PORTAL</h1>
+  <ul>
+    <a href="/">Home</a>
+    <a href="/auth/login">Login</a>
+    <a href="/auth/logout">Logout</a>
+  </ul>
+  
+  </header>
+</nav>
+{{/if}}
+
+
+<article>
+  
+Modern identity management requires scaleable, consistent reliablity to ensure the availablity of applications and services to only authenticated users. To adequately support the identity management needs of users, IT needs a way to provide access to approved, public software as a service (SaaS) apps, a way to host internal line of business apps, and even ways to enhance on-premises app development and usage. All of these requirements point to the need of a cloud-based identity management solution.
+
+<p>In this portal You will able to create App ,list App and search users. No need graph API . All the admin works this portal will take care.</p>
+</article>
 
 {{> footer}}
+
+</div>
+
 </body>
 </html>

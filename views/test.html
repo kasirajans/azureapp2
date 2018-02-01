@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div.container {
+    width: 100%;
+    border: 1px solid gray;
+}
+
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color: rgb(0, 0, 0);
+    clear: left;
+    text-align: center;
+}
+
+nav {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+   
+nav ul a {
+    text-decoration: none;
+}
+
+article {
+    margin-left: 170px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+   <h1>IDAM Portal</h1>
+</header>
+  
+{{#if user}}
+{{> header}}
+{{else}}
+<header>
+
+
+
+{{#if user}}
+<nav>
+{{> header}}
+</nav>
+{{else}}
+<nav>
+  <ul>
+    <a href="/">Home</a>
+    <a href="/auth/login">Login</a>
+    <a href="/auth/logout">Logout</a>
+  </ul>
+</nav>
+{{/if}}
+
+
+<article>
+  <h1>London</h1>
+  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+</article>
+
+{{> footer}}
+
+</div>
+
+</body>
+</html>
