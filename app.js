@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const hbs = require('hbs');
 const authRoutes = require('./routes/auth-routes');
+const apiRoute = require('./routes/api-Route');
 var bunyan = require('bunyan');
 var log = bunyan.createLogger({ name: "app.js" });
 const passportSetup=require('./config/passport-setup');
@@ -9,6 +10,8 @@ const passport = require('passport');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser'); 
 var expressSession = require('express-session');
+const port= process.env.PORT ||3000; 
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 const mongoose=require('mongoose');
@@ -47,10 +50,17 @@ mongoose.connect(keys.mongodb.dbURI,()=>{
   app.use(passport.session());
 
 //Is 
-//setup routes
+
 
 app.use(cookieParser());
+
+//setup routes
+
 app.use('/auth', authRoutes);
+
+app.use('/api',apiRoute);
+
+
 hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear()
 });
@@ -75,6 +85,6 @@ app.get('/profile',ensureAuthenticated, (req, res) => {
     });
 });
 
-app.listen(3000, () => console.log('Azure AD portal app listerning in 3000!'));
+app.listen(port, () => console.log('Azure AD portal app listerning in '+port));
 //module.export=hbs;
 
